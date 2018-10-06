@@ -2,8 +2,13 @@
     "compilerOptions": {
         "target": "es5",
         "outFile": "bin/tiled/tiled.js",
-        "declaration": true
+        "declaration": true,
+        "sourceMap": true
     },
+    "files": [
+        "src/layer/TMXLayerBase.ts",
+        "src/render/TMXRenderer.ts"
+    ],
     "include": [
         "libs/**/*.d.ts",
         "src/**/*.ts"
