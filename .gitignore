@@ -14,3 +14,23 @@ tools/nodejs/buildTS.local
 **/*/libs/
 
 socket.io/demo/node_modules
+
+
+/agora/libsrc/bin/
+#/base64texture/libsrc/bin/
+/benchmark/libsrc/bin/
+#/dcagent/libsrc/bin/
+/ecs/libsrc/bin/
+/gesture/libsrc/bin/
+/greensock/libsrc/bin/
+/jszip/libsrc/bin/
+/keyboard/libsrc/bin/
+#/matchvs/libsrc/bin/
+/md5/libsrc/bin/
+/mouse/libsrc/bin/
+/particle/libsrc/bin/
+/physics/libsrc/bin/
+/socket.io/libsrc/bin/
+/tiled/libsrc/bin/
+/weixinapi/libsrc/bin/
+#/youmi/libsrc/bin/
