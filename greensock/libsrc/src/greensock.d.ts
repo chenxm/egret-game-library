@@ -7,53 +7,55 @@ interface IDispatcher {
 }
 
 //com.greensock.core
-declare class Animation {
-    data:any;
-    static ticker:IDispatcher;
-    timeline:SimpleTimeline;
-    vars:Object;
+declare namespace core {
+    export class Animation {
+        data:any;
+        static ticker:IDispatcher;
+        timeline:SimpleTimeline;
+        vars:Object;
 
-    constructor(duration?:number, vars?:Object);
+        constructor(duration?:number, vars?:Object);
 
-    delay(value:number):any;
-    duration(value:number):any;
-    eventCallback(type:string, callback?:Function, params?:any[], scope?:any):any;
-    invalidate():any;
-    kill(vars?:Object, target?:Object):any;
-    pause(atTime?:any, suppressEvents?:boolean):any;
-    paused(value?:boolean):any;
-    play(from?:any, suppressEvents?:boolean):any;
-    restart(includeDelay?:boolean, suppressEvents?:boolean):any;
-    resume(from?:any, suppressEvents?:boolean):any;
-    reverse(from?:any, suppressEvents?:boolean):any;
-    reversed(value?:boolean):any;
-    seek(time:any, suppressEvents?:boolean):any;
-    startTime(value:number):any;
-    time(value:number, suppressEvents?:boolean):any;
-    timeScale(value:number):any;
-    totalDuration(value:number):any;
-    totalTime(time:number, suppressEvents?:boolean):any;
-}
+        delay(value:number):any;
+        duration(value:number):any;
+        eventCallback(type:string, callback?:Function, params?:any[], scope?:any):any;
+        invalidate():any;
+        kill(vars?:Object, target?:Object):any;
+        pause(atTime?:any, suppressEvents?:boolean):any;
+        paused(value?:boolean):any;
+        play(from?:any, suppressEvents?:boolean):any;
+        restart(includeDelay?:boolean, suppressEvents?:boolean):any;
+        resume(from?:any, suppressEvents?:boolean):any;
+        reverse(from?:any, suppressEvents?:boolean):any;
+        reversed(value?:boolean):any;
+        seek(time:any, suppressEvents?:boolean):any;
+        startTime(value:number):any;
+        time(value:number, suppressEvents?:boolean):any;
+        timeScale(value:number):any;
+        totalDuration(value:number):any;
+        totalTime(time:number, suppressEvents?:boolean):any;
+    }
 
-declare class SimpleTimeline extends Animation {
-    autoRemoveChildren:boolean;
-    smoothChildTiming:boolean;
+    export class SimpleTimeline extends Animation {
+        autoRemoveChildren:boolean;
+        smoothChildTiming:boolean;
 
-    constructor(vars?:Object);
+        constructor(vars?:Object);
 
-    add(value:any, position?:any, align?:string, stagger?:number):any;
-    insert(tween:any, time:any):any;
-    render(time:number, suppressEvents?:boolean, force?:boolean):void;
+        add(value:any, position?:any, align?:string, stagger?:number):any;
+        insert(tween:any, time:any):any;
+        render(time:number, suppressEvents?:boolean, force?:boolean):void;
+    }
 }
 
 //com.greensock
-declare class TweenLite extends Animation {
-    static defaultEase:Ease;
+declare class TweenLite extends core.Animation {
+    static defaultEase:easing.Ease;
     static defaultOverwrite:string;
     static selector:any;
     target:Object;
     static ticker:IDispatcher;
-    timeline:SimpleTimeline;
+    timeline:core.SimpleTimeline;
     vars:Object;
 
     constructor(target:Object, duration:number, vars:Object);
@@ -102,7 +104,7 @@ declare class TweenMax extends TweenLite {
     yoyo(value?:boolean):any;
 }
 
-declare class TimelineLite extends SimpleTimeline {
+declare class TimelineLite extends core.SimpleTimeline {
     constructor(vars?:Object);
 
     add(value:any, position?:any, align?:string, stagger?:number):any;
@@ -158,172 +160,179 @@ declare class TimelineMax extends TimelineLite {
 }
 
 //com.greensock.easing
-interface Back {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface Bounce {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface Circ {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface Cubic {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Ease {
-    getRatio(p:number):number;
-}
-interface EaseLookup {
-    find(name:string):Ease;
-}
-interface Elastic {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface Expo {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface Linear {
-    ease:Linear;
-    easeIn:Linear;
-    easeInOut:Linear;
-    easeNone:Linear;
-    easeOut:Linear;
-}
-interface Power0 {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Power1 {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Power2 {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Power3 {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Power4 {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Quad {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Quart {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Quint {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-interface Sine {
-    easeIn;
-    easeInOut;
-    easeOut;
-}
-interface SlowMo {
-    ease:SlowMo;
+declare namespace easing {
+    export interface Back {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface Bounce {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface Circ {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface Cubic {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Ease {
+        getRatio(p:number):number;
+    }
+    export interface EaseLookup {
+        find(name:string):Ease;
+    }
+    export interface Elastic {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface Expo {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface Linear {
+        ease:Linear;
+        easeIn:Linear;
+        easeInOut:Linear;
+        easeNone:Linear;
+        easeOut:Linear;
+    }
+    export interface Power0 {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Power1 {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Power2 {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Power3 {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Power4 {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Quad {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Quart {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Quint {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
+    export interface Sine {
+        easeIn;
+        easeInOut;
+        easeOut;
+    }
+    export interface SlowMo {
+        ease:SlowMo;
 
-    SlowMo(linearRatio:number, power:number, yoyoMode:boolean);
-    config(linearRatio:number, power:number, yoyoMode:boolean):SlowMo;
-    getRatio(p:number):number;
+        SlowMo(linearRatio:number, power:number, yoyoMode:boolean);
+        config(linearRatio:number, power:number, yoyoMode:boolean):SlowMo;
+        getRatio(p:number):number;
+    }
+    export interface SteppedEase {
+        config(steps:number):SteppedEase;
+        getRatio(p:number):number;
+    }
+    export interface Strong {
+        easeIn:Ease;
+        easeInOut:Ease;
+        easeOut:Ease;
+    }
 }
-interface SteppedEase {
-    config(steps:number):SteppedEase;
-    getRatio(p:number):number;
-}
-interface Strong {
-    easeIn:Ease;
-    easeInOut:Ease;
-    easeOut:Ease;
-}
-
 //com.greensock.plugins
-interface BezierPlugin extends TweenPlugin {
-    bezierThrough(values:any[], curviness?:number, quadratic?:boolean, correlate?:string, prepend?:Object, calcDifs?:boolean):Object;
-    cubicToQuadratic(a:number, b:number, c:number, d:number):any[];
-    quadraticToCubic(a:number, b:number, c:number):Object;
-}
-interface ColorPropsPlugin extends TweenPlugin {
+declare namespace plugins {
+    export interface BezierPlugin extends TweenPlugin {
+        bezierThrough(values:any[], curviness?:number, quadratic?:boolean, correlate?:string, prepend?:Object, calcDifs?:boolean):Object;
+        cubicToQuadratic(a:number, b:number, c:number, d:number):any[];
+        quadraticToCubic(a:number, b:number, c:number):Object;
+    }
+    export interface ColorPropsPlugin extends TweenPlugin {
 
-}
-interface CSSPlugin extends TweenPlugin {
+    }
+    export interface CSSPlugin extends TweenPlugin {
 
-}
-interface CSSRulePlugin extends TweenPlugin {
-    getRule(selector:string):Object;
-}
-interface EaselPlugin extends TweenPlugin {
+    }
+    export interface CSSRulePlugin extends TweenPlugin {
+        getRule(selector:string):Object;
+    }
+    export interface EaselPlugin extends TweenPlugin {
 
-}
-interface RaphaelPlugin extends TweenPlugin {
+    }
+    export interface RaphaelPlugin extends TweenPlugin {
 
-}
-interface RoundPropsPlugin extends TweenPlugin {
+    }
+    export interface RoundPropsPlugin extends TweenPlugin {
 
-}
-interface ScrollToPlugin extends TweenPlugin {
+    }
+    export interface ScrollToPlugin extends TweenPlugin {
 
-}
-interface TweenPlugin {
-    activate(plugins:any[]):boolean;
+    }
+    export interface TweenPlugin {
+        activate(plugins:any[]):boolean;
+    }
 }
 
 //com.greensock.easing
-declare var Back:Back;
-declare var Bounce:Bounce;
-declare var Circ:Circ;
-declare var Cubic:Cubic;
-declare var Ease:Ease;
-declare var EaseLookup:EaseLookup;
-declare var Elastic:Elastic;
-declare var Expo:Expo;
-declare var Linear:Linear;
-declare var Power0:Power0;
-declare var Power1:Power1;
-declare var Power2:Power2;
-declare var Power3:Power3;
-declare var Power4:Power4;
-declare var Quad:Quad;
-declare var Quart:Quart;
-declare var Quint:Quint;
-declare var Sine:Sine;
-declare var SlowMo:SlowMo;
-declare var SteppedEase:SteppedEase;
-declare var Strong:Strong;
+declare namespace easing {
+    export var Back:Back;
+    export var Bounce:Bounce;
+    export var Circ:Circ;
+    export var Cubic:Cubic;
+    export var Ease:Ease;
+    export var EaseLookup:EaseLookup;
+    export var Elastic:Elastic;
+    export var Expo:Expo;
+    export var Linear:Linear;
+    export var Power0:Power0;
+    export var Power1:Power1;
+    export var Power2:Power2;
+    export var Power3:Power3;
+    export var Power4:Power4;
+    export var Quad:Quad;
+    export var Quart:Quart;
+    export var Quint:Quint;
+    export var Sine:Sine;
+    export var SlowMo:SlowMo;
+    export var SteppedEase:SteppedEase;
+    export var Strong:Strong;
+}
 
 //com.greensock.plugins
-declare var BezierPlugin:BezierPlugin;
-declare var ColorPropsPlugin:ColorPropsPlugin;
-declare var CSSPlugin:CSSPlugin;
-declare var CSSRulePlugin:CSSRulePlugin;
-declare var EaselPlugin:EaselPlugin;
-declare var RaphaelPlugin:RaphaelPlugin;
-declare var RoundPropsPlugin:RoundPropsPlugin;
-declare var ScrollToPlugin:ScrollToPlugin;
-declare var TweenPlugin:TweenPlugin;
+declare namespace plugins {
+    export var BezierPlugin:BezierPlugin;
+    export var ColorPropsPlugin:ColorPropsPlugin;
+    export var CSSPlugin:CSSPlugin;
+    export var CSSRulePlugin:CSSRulePlugin;
+    export var EaselPlugin:EaselPlugin;
+    export var RaphaelPlugin:RaphaelPlugin;
+    export var RoundPropsPlugin:RoundPropsPlugin;
+    export var ScrollToPlugin:ScrollToPlugin;
+    export var TweenPlugin:TweenPlugin;
+}
